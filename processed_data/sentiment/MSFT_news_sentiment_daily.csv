@@ -1,0 +1,4 @@
+ticker,date,sentiment_score_mean,sentiment_score_median,sentiment_score_std,article_count,positive_count,neutral_count,negative_count
+MSFT,2026-03-31,0.009009183673469385,0.0,0.4742604191501992,98,45,19,34
+MSFT,2026-04-18,0.21663263157894738,0.3182,0.41740386087431963,95,64,14,17
+MSFT,2026-04-19,0.27243333333333336,0.2732,0.3138507022986141,3,2,1,0
