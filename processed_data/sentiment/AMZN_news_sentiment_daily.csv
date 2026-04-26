@@ -1,0 +1,4 @@
+ticker,date,sentiment_score_mean,sentiment_score_median,sentiment_score_std,article_count,positive_count,neutral_count,negative_count
+AMZN,2026-03-31,0.386846,0.42115,0.4385161642944017,100,76,13,11
+AMZN,2026-04-18,0.42450000000000004,0.59345,0.4937553035361897,88,66,7,15
+AMZN,2026-04-19,0.5243909090909091,0.5267,0.31937741765674493,11,10,1,0
