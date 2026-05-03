@@ -103,10 +103,10 @@ def plot_pr_curve(preds):
 #accuracy bar graph 
 
 def plot_accuracy_comparison(results):
-    # Use Gradient Boosting as "Final Model" since it's the best
+
     display = results.copy()
     display.loc[display["model"] == "Gradient Boosting", "model"] = "Gradiant Boosting"
-    display = display[display["model"].isin(["Dummy Baseline", "Logistic Regression", "Gradiant Boosting"])]
+    display = display[display["model"].isin(["Dummy Baseline", "Logistic Regression", "Gradiant Boosting", "Random Forest"])]
     display = display.sort_values("accuracy").reset_index(drop=True)
 
     fig, ax = plt.subplots(figsize=(7, 5))
@@ -114,7 +114,7 @@ def plot_accuracy_comparison(results):
 
     bars = ax.bar(display["model"], display["accuracy"], color=colors, width=0.5)
 
-    # Values on top, no y-axis
+    # Values on top
     for bar, val in zip(bars, display["accuracy"]):
         ax.text(bar.get_x() + bar.get_width() / 2,
                 bar.get_height() + 0.01,
