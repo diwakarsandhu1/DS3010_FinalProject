@@ -1,40 +1,99 @@
-# DS3010 Final Project
+# DS3010 Final Project: Predicting Stock Movement with News Sentiment
 
-## Project Structure
+This project investigates whether financial news sentiment and stock-market indicators can help predict short-term stock movement for major S&P 500 companies. The pipeline combines NewsAPI article data, Yahoo Finance stock data, VADER sentiment scores, and machine learning models for both regression and classification tasks.
 
-- `raw_data/`
-  - Stores original, unmodified data pulled from sources.
-  - Examples: raw NewsAPI article dumps, raw Yahoo Finance stock data CSVs.
+## Project Goal
 
-- `processed_data/`
-  - Stores cleaned, transformed, or merged datasets ready for analysis/modeling.
-  - Examples: sentiment-scored articles, merged news + stock datasets.
+The main goal is to evaluate whether news sentiment features improve prediction of daily stock returns and daily stock direction.
 
-- `notebooks/`
-  - Used for exploration, testing ideas, and step-by-step analysis.
-  - Examples:
-    - `data_collection.ipynb`
-    - `sentiment_analysis.ipynb`
-    - `stock_trend_exploration.ipynb`
+The project includes two modeling tasks:
 
-- `src/`
-  - Stores reusable Python scripts and project logic.
-  - Examples:
-    - `data_collection.py` for pulling data from APIs
-    - `preprocessing.py` for cleaning text/data
-    - `sentiment_model.py` for scoring article sentiment
-    - `train_model.py` for predictive modeling
+1. **Regression:** predict the numeric one-day return (`Return_1D`)
+2. **Classification:** predict whether the stock moves up or down/flat on a given day
 
-- `models/`
-  - Stores saved trained models and related files.
-  - Examples: `.pkl` model files, vectorizers, scalers.
+## Data Sources
 
-- `figures/`
-  - Stores charts, plots, and visualizations used in reports or presentations.
+The project uses two primary data sources:
 
-- `outputs/`
-  - Stores final generated results from scripts or notebooks.
-  - Examples: prediction CSVs, evaluation summaries, exported tables.
+- **NewsAPI**: company-related news articles
+- **Yahoo Finance / yfinance**: historical stock price and volume data
 
-- `main.py`
-  - Entry point for running the project pipeline or main analysis steps.
+The analysis focuses on major companies including:
+
+- AAPL
+- AMZN
+- AVGO
+- BRK-B
+- GOOG
+- GOOGL
+- META
+- MSFT
+- NVDA
+- TSLA
+
+
+## Methodology
+
+1. **Collect Data**  
+   News articles were gathered from NewsAPI, and historical stock data was collected from Yahoo Finance using `yfinance`.
+
+2. **Score Sentiment**  
+   Each news article was scored with VADER sentiment analysis and labeled as positive, neutral, or negative.
+
+3. **Merge Datasets**  
+   Daily sentiment features were aggregated by ticker and date, then merged with stock price and technical indicator data.
+
+4. **Build Features**  
+   The final dataset includes sentiment statistics, article counts, stock prices, moving averages, volatility, and ticker information.
+
+5. **Train Models**  
+   Regression models were used to predict daily stock returns, while classification models were used to predict whether a stock moved up or down/flat.
+
+6. **Evaluate Results**  
+   Regression models were evaluated with MAE, RMSE, and R². Classification models were evaluated with accuracy, precision, recall, and F1-score.
+  
+## How to Run
+
+1. **Create and activate a virtual environment**
+
+```bash
+python -m venv .venv
+source .venv/bin/activate      # macOS/Linux
+.venv\Scripts\activate         # Windows
+```
+
+2. **Install dependencies**
+
+```bash
+pip install -r requirements.txt
+```
+
+3. **Add your NewsAPI key**
+
+Create a `.env` file:
+
+```text
+NEWS_API_KEY=your_api_key_here
+```
+
+4. **Run the main scripts**
+
+```bash
+python src/sentiment_model.py
+python src/join_datasets.py
+python src/clean_merged.py
+python src/regression.py
+```
+
+5. **Optional: generate visuals**
+
+```bash
+python src/regvisualizations.py
+python src/classvisuals.py
+```
+
+Classification models can also be run from:
+
+```text
+notebooks/classification_models_notebook.ipynb
+```
